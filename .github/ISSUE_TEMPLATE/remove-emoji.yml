@@ -1,0 +1,24 @@
+name: Remove Emoji
+description: Propose removing an emoji from the vibe set
+labels: [vote-open]
+title: "[remove] EMOJI — "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        👍 this issue to approve, 👎 to reject.
+        Voting closes 7 days after creation. Needs 70% approval with at least 3 votes.
+  - type: input
+    id: emoji
+    attributes:
+      label: Emoji
+      placeholder: "🧼"
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why?
+      placeholder: "Explain why this emoji should be removed"
+    validations:
+      required: false
