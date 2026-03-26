@@ -22,7 +22,7 @@ Title format: `[add|change|remove] <emoji> — <short description>`
 
 ```bash
 gh issue create \
-  --repo ryanmarren/emoji-vibes \
+  --repo rymarren/emoji-vibes \
   --label "vote-open" \
   --title "[ACTION] EMOJI — SHORT_DESCRIPTION" \
   --body "**Action:** ACTION
