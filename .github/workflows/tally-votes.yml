@@ -1,0 +1,120 @@
+name: Tally Emoji Vibe Votes
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch: {}
+
+env:
+  MIN_VOTES: 3
+  APPROVAL_THRESHOLD: 70
+
+jobs:
+  tally:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tally votes and update vibes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          REPO="${{ github.repository }}"
+          CUTOFF_DATE=$(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-7d +%Y-%m-%dT%H:%M:%SZ)
+          CHANGES_MADE=false
+
+          # Get all open issues with vote-open label
+          ISSUES=$(gh issue list --repo "$REPO" --label "vote-open" --state open --json number,title,body,createdAt --limit 100)
+
+          echo "$ISSUES" | jq -c '.[]' | while read -r ISSUE; do
+            NUMBER=$(echo "$ISSUE" | jq -r '.number')
+            TITLE=$(echo "$ISSUE" | jq -r '.title')
+            BODY=$(echo "$ISSUE" | jq -r '.body')
+            CREATED=$(echo "$ISSUE" | jq -r '.createdAt')
+
+            # Skip issues younger than 7 days
+            if [[ "$CREATED" > "$CUTOFF_DATE" ]]; then
+              echo "Issue #$NUMBER is still in voting window, skipping"
+              continue
+            fi
+
+            # Get reactions on the issue
+            REACTIONS=$(gh api "repos/$REPO/issues/$NUMBER/reactions" --paginate --jq '[.[] | .content]')
+            THUMBS_UP=$(echo "$REACTIONS" | jq '[.[] | select(. == "+1")] | length')
+            THUMBS_DOWN=$(echo "$REACTIONS" | jq '[.[] | select(. == "-1")] | length')
+            TOTAL=$((THUMBS_UP + THUMBS_DOWN))
+
+            echo "Issue #$NUMBER: $THUMBS_UP 👍 / $THUMBS_DOWN 👎 (total: $TOTAL)"
+
+            # Skip if not enough votes
+            if [[ $TOTAL -lt $MIN_VOTES ]]; then
+              echo "  Not enough votes yet ($TOTAL < $MIN_VOTES), skipping"
+              continue
+            fi
+
+            # Calculate approval percentage
+            PERCENT=$((THUMBS_UP * 100 / TOTAL))
+
+            if [[ $PERCENT -ge $APPROVAL_THRESHOLD ]]; then
+              echo "  APPROVED ($PERCENT%)"
+
+              # Parse action from title: [add|change|remove]
+              ACTION=$(echo "$TITLE" | grep -oP '^\[(add|change|remove)\]' | tr -d '[]')
+              # Parse emoji from body
+              EMOJI=$(echo "$BODY" | grep -oP '(?<=\*\*Emoji:\*\* ).+' | head -1 | xargs)
+
+              if [[ -z "$ACTION" || -z "$EMOJI" ]]; then
+                echo "  Could not parse action or emoji from issue, skipping"
+                continue
+              fi
+
+              case "$ACTION" in
+                add|change)
+                  MEANING=$(echo "$BODY" | grep -oP '(?<=\*\*Proposed meaning:\*\* ).+' | head -1 | xargs)
+                  TAGS_RAW=$(echo "$BODY" | grep -oP '(?<=\*\*Tags:\*\* ).+' | head -1 | xargs)
+                  TAGS_JSON=$(echo "$TAGS_RAW" | jq -R '[split(",") | .[] | gsub("^\\s+|\\s+$"; "")]')
+
+                  if [[ -z "$MEANING" ]]; then
+                    echo "  Could not parse meaning, skipping"
+                    continue
+                  fi
+
+                  # Update vibes.json
+                  jq --arg emoji "$EMOJI" \
+                     --arg meaning "$MEANING" \
+                     --argjson tags "$TAGS_JSON" \
+                     '.vibes[$emoji] = {"meaning": $meaning, "tags": $tags}' \
+                     vibes.json > vibes.tmp && mv vibes.tmp vibes.json
+                  ;;
+                remove)
+                  jq --arg emoji "$EMOJI" 'del(.vibes[$emoji])' vibes.json > vibes.tmp && mv vibes.tmp vibes.json
+                  ;;
+              esac
+
+              # Close issue with approval comment
+              gh issue close "$NUMBER" --repo "$REPO" \
+                --comment "Approved! Vibes updated ($THUMBS_UP 👍 / $THUMBS_DOWN 👎 = $PERCENT%). Changes will be live in the next plugin update."
+
+              CHANGES_MADE=true
+            else
+              echo "  REJECTED ($PERCENT%)"
+              gh issue close "$NUMBER" --repo "$REPO" \
+                --comment "Did not pass ($THUMBS_UP 👍 / $THUMBS_DOWN 👎 = $PERCENT%). Feel free to repropose!"
+            fi
+          done
+
+          # Commit changes if any were made
+          if git diff --quiet vibes.json; then
+            echo "No changes to vibes.json"
+          else
+            git config user.name "emoji-vibes-bot"
+            git config user.email "emoji-vibes-bot@users.noreply.github.com"
+            git add vibes.json
+            git commit -m "[emoji-vibes-bot] Update vibes from approved proposals"
+            git push
+          fi
