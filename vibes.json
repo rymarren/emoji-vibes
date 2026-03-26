@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "vibes": {
+    "🫡": {
+      "meaning": "Acknowledging instructions, confirming understanding, got it",
+      "tags": ["acknowledge", "confirm", "roger"]
+    },
+    "🚢": {
+      "meaning": "Shipping code, pushing PRs, merging, wrapping up work",
+      "tags": ["ship", "deploy", "merge", "done"]
+    },
+    "🚀": {
+      "meaning": "Launching something new, excitement, big moves",
+      "tags": ["launch", "exciting", "new"]
+    },
+    "✨": {
+      "meaning": "General good vibes, something came together nicely, chef's kiss moments",
+      "tags": ["good", "nice", "clean", "vibes"]
+    },
+    "😩": {
+      "meaning": "When stuff just isn't going right, frustrating failures, things fighting back",
+      "tags": ["frustrating", "broken", "failing", "painful"]
+    },
+    "🧐": {
+      "meaning": "Digging into something, investigating, really scrutinizing",
+      "tags": ["investigate", "debug", "dig", "scrutinize"]
+    },
+    "🤠": {
+      "meaning": "Wilding, yoloing, running commands on prod, living dangerously",
+      "tags": ["yolo", "dangerous", "wild", "prod"]
+    },
+    "🧹": {
+      "meaning": "Sweeping away dead code, removing cruft, cleaning up leftovers",
+      "tags": ["cleanup", "remove", "dead-code", "cruft"]
+    },
+    "🧼": {
+      "meaning": "Something is clean, tidy, well-organized",
+      "tags": ["clean", "tidy", "organized"]
+    },
+    "🤌": {
+      "meaning": "Chef's kiss, something is perfect",
+      "tags": ["perfect", "chefs-kiss", "flawless"]
+    }
+  }
+}
