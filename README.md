@@ -52,6 +52,7 @@ If auto-update isn't picking up changes, you can manually refresh:
 | 💎 | Found something valuable, key insight, this is the important bit |
 | ⛏️ | Struck gold, hit the jackpot on a search, dug up exactly what we needed |
 | 🏎️ | Blazing fast, optimized the hell out of something, speed demon energy |
+| 🧘 | Letting it be, accepting complexity, releasing what you can't control, not every problem needs solving |
 
 ## Propose a Change
 
