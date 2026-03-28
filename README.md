@@ -4,6 +4,14 @@ Emoji vibes for Claude Code. Teaches Claude which emojis to use and when.
 
 ## Install
 
+From the marketplace:
+
+```
+claude marketplace add emoji-vibes
+```
+
+Or directly from GitHub:
+
 ```
 claude install-plugin rymarren/emoji-vibes
 ```
