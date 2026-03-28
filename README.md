@@ -36,4 +36,9 @@ claude install-plugin rymarren/emoji-vibes
 | 🤯 | Mind blown, something truly insane just happened, can't believe that worked |
 | 💎 | Found something valuable, key insight, this is the important bit |
 | ⛏️ | Struck gold, hit the jackpot on a search, dug up exactly what we needed |
+| 🏎️ | Blazing fast, optimized the hell out of something, speed demon energy |
+
+## Propose a Change
+
+Think a vibe is wrong, missing, or needs to go? Just tell Claude — say something like "I think 🤠 should mean something different" or "add a skull emoji" and it'll open an issue on this repo with your proposal.
 
