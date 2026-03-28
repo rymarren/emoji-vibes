@@ -4,13 +4,13 @@
     "name": "rymarren"
   },
   "metadata": {
-    "description": "Community-governed emoji vibes for Claude Code",
+    "description": "Emoji vibes for Claude Code",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "emoji-vibes",
-      "description": "Community-governed emoji vibes for Claude Code. Teaches Claude which emojis to use and when, with democratic voting to evolve the mappings.",
+      "description": "Emoji vibes for Claude Code. Teaches Claude which emojis to use and when.",
       "source": "./"
     }
   ]

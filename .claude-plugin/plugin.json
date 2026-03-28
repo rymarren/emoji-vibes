@@ -1,6 +1,6 @@
 {
   "name": "emoji-vibes",
-  "description": "Community-governed emoji vibes for Claude Code. Teaches Claude which emojis to use and when, with democratic voting to evolve the mappings.",
+  "description": "Emoji vibes for Claude Code. Teaches Claude which emojis to use and when.",
   "version": "1.0.0",
   "author": {
     "name": "rymarren"

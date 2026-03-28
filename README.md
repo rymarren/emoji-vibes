@@ -1,6 +1,6 @@
 # emoji-vibes
 
-Community-governed emoji vibes for Claude Code. Teaches Claude which emojis to use and when, with democratic voting to evolve the mappings.
+Emoji vibes for Claude Code. Teaches Claude which emojis to use and when.
 
 ## Install
 
@@ -29,6 +29,3 @@ claude install-plugin rymarren/emoji-vibes
 | 💎 | Found something valuable, key insight, this is the important bit |
 | ⛏️ | Struck gold, hit the jackpot on a search, dug up exactly what we needed |
 
-## Proposing Changes
-
-Want to add, change, or remove a vibe? Just tell Claude — it'll walk you through opening a proposal as a GitHub issue. Proposals need 70% approval with at least 3 votes within a week to pass.

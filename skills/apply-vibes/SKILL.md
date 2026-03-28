@@ -1,6 +1,6 @@
 ---
 name: apply-vibes
-description: Use when responding to any message — guides emoji usage to match community-voted vibes
+description: Use when responding to any message — guides emoji usage to match the vibes
 ---
 
 # Emoji Vibes

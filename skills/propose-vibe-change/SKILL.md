@@ -12,7 +12,7 @@ When Ryan wants to add, change, or remove an emoji vibe, just do it directly.
 1. **Identify the change type:** Is this an add, change, or remove?
 2. **Show current state:** Check the current vibes list below and show the current meaning for the emoji (if it exists).
 3. **Clarify if needed:** Ask what the vibe should be (for adds/changes) or confirm removal.
-4. **Make the change:** Update vibes.json and both skill files inline.
+4. **Make the change:** Update both skill files and README inline.
 
 ## Current Vibes
 
