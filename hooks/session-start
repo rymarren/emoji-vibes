@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# SessionStart hook for emoji-vibes plugin
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Read apply-vibes skill content
+apply_vibes_content=$(cat "${PLUGIN_ROOT}/skills/apply-vibes/SKILL.md" 2>&1 || echo "Error reading apply-vibes skill")
+
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+apply_vibes_escaped=$(escape_for_json "$apply_vibes_content")
+session_context="You have emoji-vibes installed. Use emojis naturally when the vibe fits — don't force them.\n\n${apply_vibes_escaped}"
+
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  printf '{\n  "additional_context": "%s"\n}\n' "$session_context"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
+  printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
+else
+  printf '{\n  "additional_context": "%s"\n}\n' "$session_context"
+fi
+
+exit 0
