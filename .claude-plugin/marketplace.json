@@ -4,8 +4,7 @@
     "name": "rymarren"
   },
   "metadata": {
-    "description": "Emoji vibes for Claude Code",
-    "version": "1.0.0"
+    "description": "Emoji vibes for Claude Code"
   },
   "plugins": [
     {

@@ -16,6 +16,21 @@ Or directly from GitHub:
 claude install-plugin rymarren/emoji-vibes
 ```
 
+### Staying up to date
+
+After installing, enable auto-update for the marketplace so you get new vibes automatically:
+
+1. Open `/plugin` in Claude Code
+2. Go to the **Marketplaces** tab
+3. Enable **auto-update** for emoji-vibes
+
+If auto-update isn't picking up changes, you can manually refresh:
+
+```
+/plugin marketplace update emoji-vibes
+/reload-plugins
+```
+
 ## Vibes
 
 | Emoji | Vibe |
@@ -42,3 +57,6 @@ claude install-plugin rymarren/emoji-vibes
 
 Think a vibe is wrong, missing, or needs to go? Just tell Claude — say something like "I think 🤠 should mean something different" or "add a skull emoji" and it'll open an issue on this repo with your proposal.
 
+## Versioning
+
+Plugin updates are delivered through `plugin.json` — bumping its version triggers updates for installed users without needing to update the marketplace listing. The marketplace is just for discovery.
