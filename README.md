@@ -33,6 +33,7 @@ To get new vibes automatically, enable auto-update: `/plugin` → **Marketplaces
 | ⛏️ | Struck gold, hit the jackpot on a search, dug up exactly what we needed |
 | 🏎️ | Blazing fast, optimized the hell out of something, speed demon energy |
 | 🧘 | Letting it be, accepting complexity, releasing what you can't control, not every problem needs solving |
+| 💀 | So bad it's funny, I'm fucking dead, can't even, comedic disaster |
 
 ## Propose a Change
 
