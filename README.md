@@ -4,32 +4,12 @@ Emoji vibes for Claude Code. Teaches Claude which emojis to use and when.
 
 ## Install
 
-From the marketplace:
-
 ```
-claude marketplace add emoji-vibes
-```
-
-Or directly from GitHub:
-
-```
-claude install-plugin rymarren/emoji-vibes
+/plugin marketplace add rymarren/emoji-vibes
+/plugin install emoji-vibes@rymarren-emoji-vibes
 ```
 
-### Staying up to date
-
-After installing, enable auto-update for the marketplace so you get new vibes automatically:
-
-1. Open `/plugin` in Claude Code
-2. Go to the **Marketplaces** tab
-3. Enable **auto-update** for emoji-vibes
-
-If auto-update isn't picking up changes, you can manually refresh:
-
-```
-/plugin marketplace update emoji-vibes
-/reload-plugins
-```
+To get new vibes automatically, enable auto-update: `/plugin` → **Marketplaces** → select emoji-vibes → **Enable auto-update**.
 
 ## Vibes
 
