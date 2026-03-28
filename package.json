@@ -1,5 +1,5 @@
 {
   "name": "emoji-vibes",
-  "version": "1.0.0",
-  "description": "Community-governed emoji vibes for Claude Code. Teaches Claude which emojis to use and when, with democratic voting to evolve the mappings."
+  "version": "2.0.0",
+  "description": "Emoji vibes for Claude Code. Teaches Claude which emojis to use and when."
 }
